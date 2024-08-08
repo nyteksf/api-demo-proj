@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MovieNite</title>
+        <link rel="icon" href="./assets/favicon2.png" type="image/x-icon" />
+        <link rel="stylesheet" href="./styles.css" />
+        <script
+            src="https://kit.fontawesome.com/f42fa95770.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="index.js" defer></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js"
+            charset="utf-8"
+            async
+        ></script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <img
+                    class="nav__logo"
+                    src="./assets/movienitelogo.png"
+                    alt="Navbar logo"
+                />
+                <div class="xmark--close-nav-search">
+                    <i
+                        onclick="toggleNavSearch()"
+                        class="fa-solid fa-xmark xmark--close-nav-search"
+                    >
+                    </i>
+                </div>
+                <div class="nav__list--container">
+                    <ul class="nav__list">
+                        <li class="nav__list--item">
+                            <a class="nav__link" href="#latest"
+                                >Latest Movies</a
+                            >
+                        </li>
+                        <li class="nav__list--item">
+                            <a class="nav__link" href="#popular"
+                                >Most Popular</a
+                            >
+                        </li>
+                        <li class="nav__list--item">
+                            <a class="nav__link" href="#rated">Highest Rated</a>
+                        </li>
+                        <li class="nav__list--item">
+                            <a
+                                class="nav__link"
+                                href="./viewallmovies.html?all"
+                                value="all"
+                                onclick="setNavDiscover(event)"
+                                >Discover</a
+                            >
+                        </li>
+                        <li class="nav__list--item">
+                            <a class="nav__link" href="#">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav__right">
+                    <ul class="nav__right--list">
+                        <form action="/viewallmovies.html" method="get">
+                            <div class="nav__input--wrapper">
+                                <input
+                                    class="nav__search--input"
+                                    type="text"
+                                    name="query"
+                                    placeholder="Type and Press Enter To Search"
+                                />
+                            </div>
+                        </form>
+                        <li class="nav__right--list-item">
+                            <a
+                                class="nav__right--link"
+                                href="#"
+                                onclick="toggleNavSearch()"
+                            >
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </a>
+                        </li>
+                        <li class="nav__right--list-item">
+                            <button class="nav__right--btn">CONTACT ME</button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <a href="#">
+                <div class="btn--ToTop">
+                    <i class="fa-solid fa-angle-up"></i>
+                </div>
+            </a>
+            <div class="loading-overlay">
+                <div class="pseudo-button--outer">
+                    <div class="pseudo-button">
+                        <figure>
+                            <img
+                                class="play-icon"
+                                src="./assets/play-icon.png"
+                            />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <section id="landing-page">
+                <form action="/viewallmovies.html" method="get">
+                    <div class="search">
+                        <h1 class="search__title">START STREAMING NOW</h1>
+                        <div class="search__input--wrapper">
+                            <input
+                                class="search__input"
+                                type="text"
+                                name="query"
+                                placeholder="Enter Movie Title"
+                            />
+                            <button class="search__input--btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="radio-panel--wrapper">
+                    <div
+                        class="radio__btn radio__btn--1"
+                        onclick="radioBtnSelected(this)"
+                    ></div>
+                    <div
+                        class="radio__btn radio__btn--2"
+                        onclick="radioBtnSelected(this)"
+                    ></div>
+                    <div
+                        class="radio__btn radio__btn--3"
+                        onclick="radioBtnSelected(this)"
+                    ></div>
+                </div>
+            </section>
+            <section id="latest">
+                <div class="container">
+                    <div class="row">
+                        <div class="section--wrapper">
+                            <div class="latest--wrapper">
+                                <div class="latest__header all__header">
+                                    <h2 class="latest__title all__title">
+                                        Latest Movies
+                                    </h2>
+                                    <a
+                                        class="latest__link all__link"
+                                        href="./viewallmovies.html"
+                                        value="latest"
+                                        onclick="setNavLatest(event)"
+                                    >
+                                        <button
+                                            class="btn--see-all latest__btn"
+                                        >
+                                            <span class="btn--see-all-text"
+                                                >VIEW ALL</span
+                                            >
+                                            <span class="double-angle-right"
+                                                >»</span
+                                            >
+                                        </button>
+                                    </a>
+                                </div>
+                                <div
+                                    class="movies-container--latest movies--container"
+                                >
+                                    <div class="movie--wrapper">
+                                        <div class="movie">
+                                            <img
+                                                class="movie__img"
+                                                src="https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"
+                                            />
+                                            <div
+                                                class="movie--wrapper-bg"
+                                            ></div>
+                                            <div class="movie__description">
+                                                <div
+                                                    class="movie__rating--wrapper"
+                                                >
+                                                    <div
+                                                        class="movie__rating--stars"
+                                                    >
+                                                        <i
+                                                            class="fa-solid fa-star"
+                                                        ></i>
+                                                        <i
+                                                            class="fa-solid fa-star"
+                                                        ></i>
+                                                        <i
+                                                            class="fa-solid fa-star"
+                                                        ></i>
+                                                        <i
+                                                            class="fa-solid fa-star"
+                                                        ></i>
+                                                        <i
+                                                            class="fa-solid fa-star"
+                                                        ></i>
+                                                    </div>
+                                                    <p
+                                                        class="movie__rating--score"
+                                                    >
+                                                        5/5
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    class="movie__play-btn--wrapper"
+                                                >
+                                                    <div
+                                                        class="movie__play-btn"
+                                                    >
+                                                        <i
+                                                            class="fa-solid fa-play"
+                                                        ></i>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="movie__title-and-date"
+                                                >
+                                                    <h5 class="movie-title">
+                                                        Deadpool & Wolverine
+                                                    </h5>
+                                                    <p
+                                                        class="movie__release-date"
+                                                    >
+                                                        Jul 24, 2024
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="movie--wrapper">
+                                        <div class="movie"></div>
+                                    </div>
+                                    <div class="movie--wrapper">
+                                        <div class="movie"></div>
+                                    </div>
+                                    <div class="movie--wrapper">
+                                        <div class="movie"></div>
+                                    </div>
+                                    <div class="movie--wrapper">
+                                        <div class="movie"></div>
+                                    </div>
+                                    <div class="movie--wrapper">
+                                        <div class="movie"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="popular">
+                <div class="container">
+                    <div class="row">
+                        <div class="section--wrapper">
+                            <div class="popular__header all__header">
+                                <h2 class="popular__title all__title">
+                                    Popular Movies
+                                </h2>
+                                <a
+                                    class="popular__link all__link"
+                                    href="./viewallmovies.html"
+                                    value="popular"
+                                    onclick="setNavPopular(event)"
+                                >
+                                    <button class="btn--see-all popular__btn">
+                                        <span class="btn--see-all-text"
+                                            >VIEW ALL</span
+                                        >
+                                        <span class="double-angle-right"
+                                            >»</span
+                                        >
+                                    </button>
+                                </a>
+                            </div>
+                            <div
+                                class="movies-container--popular movies--container"
+                            >
+                                <!-- MOVIES RENDER HERE -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="rated">
+                <div class="container">
+                    <div class="row">
+                        <div class="section--wrapper">
+                            <div class="rated__header all__header">
+                                <h2 class="rated__title all__title">
+                                    Highest Rated Movies
+                                </h2>
+                                <a
+                                    class="rated__link all__link"
+                                    href="./viewallmovies.html"
+                                    value="rated"
+                                    onclick="setNavRated(event)"
+                                >
+                                    <button class="btn--see-all rated__btn">
+                                        <span class="btn--see-all-text"
+                                            >VIEW ALL</span
+                                        >
+                                        <span class="double-angle-right"
+                                            >»</span
+                                        >
+                                    </button>
+                                </a>
+                            </div>
+                            <div
+                                class="movies-container--rated movies--container"
+                            >
+                                <!-- MOVIES RENDER HERE -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <ul class="footer__list">
+                <li class="footer__list--wrapper">
+                    <ul class="footer__list-1 footer__list">
+                        <li
+                            class="footer__list-item-1 footer__list-item footer__list-item--main"
+                        >
+                            <img
+                                class="footer-logo"
+                                src="./assets/movienitelogo.png"
+                            />
+                        </li>
+                        <li class="footer__list-item">
+                            <p class="footer__para">
+                                Lorem ipsum dolor sit amet consectetur,
+                                adipisicing elit. Vel quibusdam, cum in
+                                veritatis non ducimus?
+                            </p>
+                        </li>
+                    </ul>
+                    <ul class="footer__list-2 footer__list">
+                        <li class="footer__list-item footer__list-item--main">
+                            <h2>Useful Links</h2>
+                        </li>
+                        <li class="footer__list-item"></li>
+                        <li
+                            class="footer__list-item footer__list-item--gen-link"
+                        >
+                            Updates
+                        </li>
+                        <li
+                            class="footer__list-item footer__list-item--gen-link"
+                        >
+                            Onion Forum
+                        </li>
+                        <li
+                            class="footer__list-item footer__list-item--gen-link"
+                        >
+                            My Account
+                        </li>
+                        <li
+                            class="footer__list-item footer__list-item--gen-link"
+                        >
+                            My Watch List
+                        </li>
+                    </ul>
+                    <ul class="footer__list-3 footer__list">
+                        <li class="footer__list-item footer__list-item--main">
+                            <h2>Latest News</h2>
+                        </li>
+                        <li class="footer__list-item footer__list-item--blog">
+                            <a class="footer__list-item--blog-link" href=""
+                                >Blog Post 1</a
+                            >
+                            <small class="footer__small-text"
+                                >Date.js RENDERED HERE-</small
+                            >
+                        </li>
+                        <li class="footer__list-item footer__list-item--blog">
+                            <a class="footer__list-item--blog-link" href=""
+                                >Blog Post 2</a
+                            >
+                            <small class="footer__small-text"
+                                >Date.js HERE</small
+                            >
+                        </li>
+                        <li class="footer__list-item footer__list-item--blog">
+                            <a class="footer__list-item--blog-link" href=""
+                                >Blog Post 1</a
+                            >
+                            <small class="footer__small-text"
+                                >Date.js HERE</small
+                            >
+                        </li>
+                    </ul>
+                    <ul class="footer__list-4 footer__list">
+                        <li class="footer__list-item footer__list-item--main">
+                            <h2>Follow Me</h2>
+                        </li>
+                        <p class="footer__para">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing
+                            elit. Vero, eum excepturi!
+                        </p>
+                        <li class="footer__list--4 footer__list-item">
+                            <ul class="footer__social-links">
+                                <li
+                                    class="footer__list-item footer__list-item--social"
+                                >
+                                    <div
+                                        class="footer__social-link footer__social-link--facebook"
+                                    >
+                                        <i class="fa-brands fa-facebook"></i>
+                                    </div>
+                                </li>
+                                <li
+                                    class="footer__list-item footer__list-item--social"
+                                >
+                                    <div
+                                        class="footer__social-link footer__social-link--twitter"
+                                    >
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </div>
+                                </li>
+                                <li
+                                    class="footer__list-item footer__list-item--social"
+                                >
+                                    <div
+                                        class="footer__social-link footer__social-link--instagram"
+                                    >
+                                        <i class="fa-brands fa-instagram"></i>
+                                    </div>
+                                </li>
+                                <li
+                                    class="footer__list-item footer__list-item--social"
+                                >
+                                    <div
+                                        class="footer__social-link footer__social-link--rss"
+                                    >
+                                        <i class="fa-solid fa-rss"></i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </footer>
+    </body>
+</html>

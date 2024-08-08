@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>movienite</title>
+        <script
+            src="https://kit.fontawesome.com/f42fa95770.js"
+            crossorigin="anonymous"
+            defer
+        ></script>
+        <script src="./watchmovie.js" defer></script>
+        <link rel="icon" href="./assets/favicon1.png" type="image/x-icon">
+        <link rel="stylesheet" href="./styles.css" />
+        <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
+        <style>
+            body, html {
+                height: 100vh;
+                width:  100vw;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body class="hide-body-overflow">
+        <div class="watch-movie-page--bg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="watch-movie--wrapper">
+                    <div class="watch-movie__cast--wrapper">
+                        <div class="watch-movie__cast"></div>
+                    </div>
+                    <div class="watch-movie__poster">
+                        <figure class="watch-movie__poster--wrapper">
+                            <!-- MOVIE POSTER RENDERS HERE-->
+                        </figure>
+                    </div>
+                    <div class="watch-movie__data">
+                        <i class="fa-solid fa-xmark xmark--watch-movie" onclick="goBack()"></i>
+                        <i
+                            class="fa-solid fa-xmark xmark--watch-movie xmark--close-trailer"
+                            onclick="hideTrailer();"
+                        ></i>
+                        <div class="watch-movie__data--upper">
+                            <div class="watch-movie__data-title">
+                                <h1><!-- MOVIE TITLE RENDERS HERE --></h1>
+                            </div>
+                            <div class="watch-movie__data--info">
+                                <!-- MOVIE INFO RENDERS HERE -->
+                                <ul class="movie-info__list">
+                                    <li class="movie-info__list-item">2024</li>
+                                    <li class="movie-info__list-item">
+                                        97 min
+                                    </li>
+                                    <li class="movie-info__list-item">
+                                        Animation / Adventure / Adventure /
+                                        Comedy
+                                    </li>
+                                    <li class="movie-info__list-item">
+                                        RATING
+                                    </li>
+                                    <li class="movie-info__list-item">
+                                        SHOW CAST
+                                    </li>
+                                    <li
+                                        class="movie-info__list-item imdb-list-item"
+                                    >
+                                        <a href="https://www.imdb.com/title/">
+                                            <img src="./assets/imdb_icon.png" />
+                                        </a>
+                                    </li>
+                                    <li class="movie-info__list-item">
+                                        RATING
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="cast-info--wrapper"></div>
+                            <div class="watch-movie__data--para-wrapper">
+                                <!-- MOVIE DESCRIPTION RENDERS HERE -->
+                            </div>
+                        </div>
+                        <div class="watch-movie__data--btns">
+                            <a
+                                href=""
+                                class="youtubeTrailerLink"
+                                onclick="blockTrailerBtn(event)"
+                            >
+                                <button
+                                    class="btn__movie btn__watch-trailer"
+                                    onclick="blockTrailerBtn(event); showTrailer(); fetchTrailer();"
+                                >
+                                    Watch Trailer
+                                </button>
+                            </a>
+                            <button class="btn__movie btn__play-movie" onclick="">
+                                <i class="fa-solid fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="streaming-player" class="webtor"></div>
+        <div class="video__loading-state">
+            <div class="pseudo-button">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </div>
+        <div class="youTubeVideo--wrapper"></div>
+        <video class="streamingVideoPlayer"></video>
+        <div class="video-underlay"></div>
+        <iframe
+            id="youtubeVideo"
+            src="#"
+            frameborder="0"
+            class="youtubeVideoLink"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+        >
+            <div
+                style="
+                    width: 100%;
+                    height: 100%;
+                "
+            >
+            </div>
+            <video id="trailerVideo" controls>
+                <source src="#" type="video/mp4" class="trailerVideoLink" />
+                Your browser does not support the video tag.
+            </video>
+        </iframe>
+    </body>
+</html>

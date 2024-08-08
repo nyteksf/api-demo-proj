@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieNite</title>
+    <link rel="icon" href="./assets/favicon2.png" type="image/x-icon">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./viewallmovies.js" defer></script>
+    <script src="https://kit.fontawesome.com/f42fa95770.js" crossorigin="anonymous" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="./index.html">
+                <img
+                    class="nav__logo nav__logo--dark"
+                    src="./assets/movienitelogo.png"
+                    alt="Navbar logo"
+                />
+            </a>
+            <div class="xmark--close-nav-search">
+                <i
+                            onclick="toggleNavSearch()"
+                            class="fa-solid fa-xmark xmark--close-nav-search"
+                        >
+                </i>
+            </div>
+            <div class="nav__right">
+                <ul class="nav__right--list">
+                    <form action="/viewallmovies.html" method="get">
+                        <div class="nav__input--wrapper">
+                            <input
+                                class="nav__search--input nav__search--input-all"
+                                type="text"
+                                name="query"
+                                placeholder="Type and Press Enter To Search"
+                            />
+                        </div>
+                    </form>
+                    <li class="nav__right--list-item">
+                        <a
+                            class="nav__right--link"
+                            href="#"
+                            onclick="toggleNavSearch()"
+                        >
+                            <i class="fa-solid fa-magnifying-glass magnifying-glass--dark"></i>
+                        </a>
+                    </li>
+                    <li class="nav__right--list-item">
+                        <button class="nav__right--btn">CONTACT ME</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="movies--wrapper">
+                <div class="all__header view-all__header filter-page__header">
+                    <h2 class="all__title view-all__title">
+                        <span class="page-type">View</span> Movies
+                    </h2>
+
+                    <div class="filter-type">
+                        <select class="dropdown--genre" name="movie-genre-options" onchange="filterResultsByGenre(event)">
+                            <option value="" disabled selected><strong>SELECT GENRE</strong></option>
+                            <option value="28">Action</option>
+                            <option value="12">Adventure</option>
+                            <option value="16">Animation</option>
+                            <option value="35">Comedy</option>
+                            <option value="80">Crime</option>
+                            <option value="99">Documentary</option>
+                            <option value="18">Drama</option>
+                            <option value="10751">Family</option>
+                            <option value="14">Fantasy</option>
+                            <option value="36">History</option>
+                            <option value="27">Horror</option>
+                            <option value="10402">Music</option>
+                            <option value="9648">Mystery</option>
+                            <option value="10749">Romance</option>
+                            <option value="878">SciFi</option>
+                            <option value="10770">TV Movie</option>
+                            <option value="53">Thriller</option>
+                            <option value="10752">War</option>
+                            <option value="37">Western</option>
+                        </select>
+                        <select class="dropdown" name="movie-type-options" onchange="filterResults(event)">
+                            <option value="" disabled selected>CHANGE TYPE</option>
+                            <option value="all"><strong>All</strong></option>
+                            <option value="latest">Latest</option>
+                            <option value="popular">Popular</option>
+                            <option value="rated">Highest Rated</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="movies-container">
+                <!-- MOVIES RENDER HERE -->
+            </div>
+            <nav class="pagination__nav">
+                <ul class="pagination-menu">
+                    <li>
+                        <a href="" class="prev" onclick="navPrev(event)">«</a>
+                    </li>
+                    <li>
+                        <a href="" class="next" onclick="navNext(event)">»</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+</html>

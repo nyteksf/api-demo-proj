@@ -1,6 +1,7 @@
 const tmdbApiKey = "f2da3975fcda82487cc3a97fcbce2479";
 let searchIsOpen = false;
 const searchTitle = document.getElementsByClassName("search__title");
+let isModalOpen   = false;
 const nav = document.querySelector("nav");
 
 // SET DATA BREADCRUMB
@@ -10,83 +11,6 @@ localStorage.setItem("lastPage", "./index.html");
 document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo(0, 0);
 });
-
-/*
-"id": 28,
-"name": "Action"
-},
-{
-"id": 12,
-"name": "Adventure"
-},
-{
-"id": 16,
-"name": "Animation"
-},
-{
-"id": 35,
-"name": "Comedy"
-},
-{
-"id": 80,
-"name": "Crime"
-},
-{
-"id": 99,
-"name": "Documentary"
-},
-{
-"id": 18,
-"name": "Drama"
-},
-{
-"id": 10751,
-"name": "Family"
-},
-{
-"id": 14,
-"name": "Fantasy"
-},
-{
-"id": 36,
-"name": "History"
-},
-{
-"id": 27,
-"name": "Horror"
-},
-{
-"id": 10402,
-"name": "Music"
-},
-{
-"id": 9648,
-"name": "Mystery"
-},
-{
-"id": 10749,
-"name": "Romance"
-},
-{
-"id": 878,
-"name": "Science Fiction"
-},
-{
-"id": 10770,
-"name": "TV Movie"
-},
-{
-"id": 53,
-"name": "Thriller"
-},
-{
-"id": 10752,
-"name": "War"
-},
-{
-"id": 37,
-"name": "Western"
-*/
 
 document.addEventListener("DOMContentLoaded", function () {
     const images = [
@@ -304,25 +228,6 @@ function setMovieCode(t) {
     localStorage.setItem("movie_id", movieCode);
 }
 
-/*
-// USE MOVIE_ID TO RETRIEVE IMDB CODE FOR USE WITH OTHER APIS: FOR ON WATCH MOVIE PAGE
-function getImdbCode(movieId) {
-    return fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${tmdbApiKey}&language=en-US`)
-        .then((response) => response.json())
-        .then((data) => {
-            const imdbId = data.imdb_id;
-            if (imdbId) {
-                localStorage.setItem("imdb_Id", imdbId);
-            }
-
-            return imdbId;
-        })
-        .catch((error) => {
-            console.error(`Error fetching IMDb ID for movie ID ${movieId}:`, error);
-        });
-}
-*/
-
 // CONVERT RATINGS TO STARS
 function convertRatingToStars(ratingOutOf10) {
     let starCount = 0;
@@ -508,6 +413,53 @@ function setNavRated(e) {
     setTimeout(() => {
         window.location.href = `./viewallmovies.html?rated`;
     }, 250);
+}
+
+/*
+
+ EMAIL CONTACT FORM
+
+*/
+
+/* MAIL CONTACT FORM FUNCTIONALITY */
+function contact(e) {
+  try {
+      e.preventDefault();
+      const loading = document.querySelector(".modal__overlay--loading");
+      const success = document.querySelector(".modal__overlay--success");
+      loading.classList += " modal__overlay--visible";
+      emailjs.sendForm(
+        "service_2zh7gkh",
+        "template_athyrzu",
+        e.target,
+        "M5JGTBwzcn6wIf6a7"
+      ).then(() => {
+        loading.classList.remove("modal__overlay--visible");
+        success.classList += " modal__overlay--visible";
+      }).catch(() => {
+        
+        loading.classList.remove("modal__overlay--visible");
+        alert("Error: The email service is temporarily unavailable. Please contact me directly on email.nytek@gmail.com.")
+      });
+  } catch (error) {
+      console.error("Error in contact function:", error);
+  }
+}
+
+/* OPEN AND CLOSE THE MAIL CONTACT FORM */
+function toggleModal() {
+  if (isModalOpen) {
+    isModalOpen = false;
+    document.querySelector("nav").classList.remove("hide-element");
+    document.querySelector(".radio-panel--wrapper").classList.remove("hide-element");
+    document.querySelector(".search").classList.remove("hide-element");
+    return document.body.classList.remove("modal--open");
+  }
+  isModalOpen = true;
+  document.querySelector("nav").classList += " hide-element";
+  document.querySelector(".radio-panel--wrapper").classList += " hide-element";
+  document.querySelector(".search").classList += " hide-element";
+  document.body.classList += " modal--open";
 }
 
 /*

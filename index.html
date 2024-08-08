@@ -84,7 +84,7 @@
                             </a>
                         </li>
                         <li class="nav__right--list-item">
-                            <button class="nav__right--btn">CONTACT ME</button>
+                            <button class="nav__right--btn" onclick="toggleModal()">CONTACT ME</button>
                         </li>
                     </ul>
                 </div>
@@ -321,6 +321,87 @@
                     </div>
                 </div>
             </section>
+            <div class="modal">
+                <div class="modal__half modal__about">
+                    <h3 class="modal__title modal__title--about">
+                        Here's a bit about me.
+                    </h3>
+                    <h4 class="modal__sub-title modal__sub-title--about">
+                        Full-Stack Web Developer
+                    </h4>
+                    <p class="modal__para">
+                        I'm a 39-year-old <strong class="purple">Fullstack Web Developer</strong> with a strong passion for developing websites with great <strong class="purple">user experiences</strong>.
+                        <br>
+                        Currently, I'm honing my skills by tackling difficult engineering challenges while learning from a team of some of the industry's most <strong class="purple">talented</strong> and <strong class="purple">experienced</strong> software engineers. I am passionate about continuous learning and leveraging my skills to contribute to innovative and impactful projects.
+                    </p>
+                    <div class="modal__languages">
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/HTML5_Badge.png" alt="Language Icon">
+                            <span class="language__name">HTML</span>
+                        </figure>
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/css-badge.png" alt="Language Icon">
+                            <span class="language__name">CSS</span>
+                        </figure>
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/javascript-badge.png" alt="Language Icon">
+                            <span class="language__name">JavaScript</span>
+                        </figure>
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/typescript-badge.png" alt="Language Icon">
+                            <span class="language__name">TypeScript</span>
+                        </figure>
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/Node.js_logo.svg.png" alt="Language Icon">
+                            <span class="language__name">Node.JS</span>
+                        </figure>
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/react-badge.png" alt="Language Icon">
+                            <span class="language__name">React</span>
+                        </figure>
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/jQuery-badge.png" alt="Language Icon">
+                            <span class="language__name">jQuery</span>
+                        </figure>
+                        <figure class="modal__language">
+                            <img class="modal__language--img" src="./assets/mysql-badge.webp" alt="Language Icon">
+                            <span class="language__name">MySQL</span>
+                        </figure>
+                    </div>
+                </div>
+                <div class="modal__half modal__contact">
+                    <i class="fa-solid fa-xmark modal__exit click" onclick="toggleModal()" aria-hidden="true"></i>
+                    <h3 class="modal__title modal__title--contact">
+                        Let's have a chat!
+                    </h3>
+                    <h4 class="modal__sub-title modal__sub-title--contact">
+                        I'm currently open to new opportunities.
+                    </h4>
+                    <form id="contact__form" onsubmit="contact(event)">
+                        <div class="form__item">
+                            <label class="form__item--label"><span class="purple required-field">*</span> Name</label>
+                            <input type="text" name="user_name" class="contact__input" required>
+                        </div>
+                        <div class="form__item">
+                            <label class="form__item--label"><span class="purple required-field">*</span> E-mail</label>
+                            <input type="email" name="user_email" class="contact__input" required>
+                        </div>
+                        <div class="form__item">
+                            <label class="form__item--label"><span class="purple required-field">*</span> Message</label>
+                            <textarea type="text" name="message" class="contact__input" required></textarea>
+                        </div>
+                        <button id="contact__submit" class="form__submit">
+                            Send it my way
+                        </button>
+                    </form>
+                    <div class="modal__overlay modal__overlay--loading">
+                        <i class="fa-solid fa-spinner" aria-hidden="true"></i>
+                    </div>
+                    <div class="modal__overlay modal__overlay--success">
+                        Thanks for the message! Looking forward to speaking with you soon.
+                    </div>
+                </div>
+            </div>
         </main>
         <footer>
             <ul class="footer__list">

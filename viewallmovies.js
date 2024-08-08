@@ -13,6 +13,12 @@ let genreSelected = false;
 // SET DATA BREADCRUMB
 localStorage.setItem("lastPage", window.location.href);
 
+// ENSURE LOADING STAGE SEEN ON LOAD, ON RETURN FROM MOVIE PAGES, ETC
+document.addEventListener("DOMContentLoaded", function () {
+    window.scrollTo(0, 0);
+});
+
+// SET UP PAGE ACCORDING TO FUNCTION
 document.addEventListener("DOMContentLoaded", function () {
     (function checkForPageType() {
         const dropdown = document.querySelector(".dropdown");
@@ -26,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const searchParam = new URLSearchParams(url.search);
         queryValue = searchParam.get("query");
 
-        console.log("queryValue " + queryValue);
         if (queryValue) {
             searchExecuted = true;
             dropdownGenre.classList.remove("view-dropdown--genre");
@@ -56,11 +61,8 @@ function filterResults(e, categoryOption, searchByAll, genreOption) {
     let searchAll = "";
     let filterType = "";
 
-    console.log(categoryOption, genreOption);
-
     // ARE WE FILTERING BY GENRE OR GENERAL CATEGORY?
     if (genreOption) {
-        console.log(genreOption);
         pullMovieList(categoryOption, pageNum, searchByAll, genreOption);
     } else {
         pageNum = 1;
@@ -94,20 +96,14 @@ function filterResults(e, categoryOption, searchByAll, genreOption) {
 
 function changeUrl(newCategory) {
     const currentURL = window.location.href;
-            const baseURL = currentURL.split('?')[0]; // Get the URL before the query parameters
-            const newURL = `${baseURL}?${newCategory}`; // Create the new URL with the new category
-            history.pushState({}, '', newURL);
+    const baseURL = currentURL.split("?")[0]; // Get the URL before the query parameters
+    const newURL  = `${baseURL}?${newCategory}`; // Create the new URL with the new category
+    history.pushState({}, "", newURL);
 }
 
 /* RENDER MOVIE CONTENT */
 function pullMovieList(filterType, pageNum, optAll, genreOption) {
     searchExecuted = false;
-    console.log("-=-=-=-=-");
-    console.log(filterType);
-    console.log(pageNum);
-    console.log(optAll);
-    console.log("-=-=-=-=-");
-
     searchCategory = optAll ? "discover" : "movie";
 
     // ALWAYS START AT PAGE 1 ON NEW DROPDOWN OPTION SELECT
@@ -126,18 +122,22 @@ function pullMovieList(filterType, pageNum, optAll, genreOption) {
 
     // ARE WE FILTERING BY GENRE OR GENERAL CATEGORY?
     if (genreOption) {
-        console.log(
-            `https://api.themoviedb.org/3/${searchCategory}/${searchType}?with_genres=${genreOption}&language=en-US&page=${pageNum}`
-        );
-
+        document.querySelector(".loading-overlay").classList.remove("hide-loading-overlay");
+        document.body.classList.add("no-scroll");
+        
         fetch(
             `https://api.themoviedb.org/3/${searchCategory}/${searchType}?with_genres=${genreOption}&language=en-US&page=${pageNum}`,
             options
         )
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
                 renderMovies(data.results, filterType);
+
+                setTimeout(() => {
+                    document.querySelector(".loading-overlay").classList +=
+                        " hide-loading-overlay";
+                    document.body.classList.remove("no-scroll");
+                }, 500);
             });
     } else {
         if (
@@ -157,10 +157,8 @@ function pullMovieList(filterType, pageNum, optAll, genreOption) {
         } else {
             searchType = "movie";
         }
-
-        console.log(
-            `https://api.themoviedb.org/3/${searchCategory}/${searchType}?language=en-US&page=${pageNum}`
-        );
+        document.querySelector(".loading-overlay").classList.remove("hide-loading-overlay");
+        document.body.classList += " no-scroll";
 
         fetch(
             `https://api.themoviedb.org/3/${searchCategory}/${searchType}?language=en-US&page=${pageNum}`,
@@ -169,6 +167,12 @@ function pullMovieList(filterType, pageNum, optAll, genreOption) {
             .then((response) => response.json())
             .then((data) => {
                 renderMovies(data.results, filterType);
+                
+                setTimeout(() => {
+                    document.querySelector(".loading-overlay").classList +=
+                        " hide-loading-overlay";
+                    document.body.classList.remove("no-scroll");
+                }, 500);
             });
     }
 }
@@ -180,7 +184,7 @@ function renderMovies(data) {
         .map((movie) => {
             // SET FALLBACK IMG FOR WHEN NO POSTER AVAILABLE
             if (movie.poster_path === null) {
-                pathToPoster = "./assets/image-unavailable.jpg"
+                pathToPoster = "./assets/image-unavailable.jpg";
             } else {
                 pathToPoster = `https://image.tmdb.org/t/p/w342/${movie.poster_path}`;
             }
@@ -362,13 +366,9 @@ function checkFilterCategory(filterAll) {
 
     // EITHER EXECUTING SEARCH OR FILTER BY CATEGORY/GENRE
     if (searchExecuted && pageNum <= totalResultsPages) {
-        console.log("pageNum " + pageNum)
-        console.log("totalResultsPages " + totalResultsPages)
-        
         clearGenreOptions();
         searchByQueryValue(queryValue, pageNum);
-    } 
-    else if (searchExecuted && pageNum >= totalResultsPages) {
+    } else if (searchExecuted && pageNum >= totalResultsPages) {
         // TOTAL SEARCH PAGE RESULT COUNT MET/EXCEEDED
         return;
     } else {
@@ -385,8 +385,8 @@ function checkFilterCategory(filterAll) {
             searchType = "movie";
             filterAll = true;
             if (genreSelected) {
-                console.log("GENRESELECTED");
                 filterResults(null, filterCategory, true, genreOption);
+
                 return;
             }
         }
@@ -402,11 +402,12 @@ function setMovieCode(t) {
 }
 
 function searchByQueryValue(queryValue, pageNumber) {
-    console.log("queryValue " + queryValue);
-    console.log("pageNumber " + pageNumber);
     if (!pageNumber) {
         pageNumber = 1;
     }
+
+        document.querySelector(".loading-overlay").classList.remove("hide-loading-overlay");
+        document.body.classList += " no-scroll";
 
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&query=${queryValue}&page=${pageNumber}`;
 
@@ -416,6 +417,12 @@ function searchByQueryValue(queryValue, pageNumber) {
             document.querySelector(".page-type").innerHTML = "Search";
             totalResultsPages = data.total_pages;
             renderMovies(data.results);
+
+            setTimeout(() => {
+                document.querySelector(".loading-overlay").classList +=
+                    " hide-loading-overlay";
+                document.body.classList.remove("no-scroll");
+            }, 500);
         })
         .catch((error) => console.error("Error:", error));
 }
@@ -428,7 +435,9 @@ function handleScroll() {
     if (hasScrolledDown === false) {
         if (window.scrollY > 0) {
             nav.classList.add("nav--scroll");
-            document.querySelector(".fa-magnifying-glass").classList.remove("magnifying-glass--dark");
+            document
+                .querySelector(".fa-magnifying-glass")
+                .classList.remove("magnifying-glass--dark");
             document.querySelector(".nav__logo").classList +=
                 " nav__logo--light";
             hasScrolledDown = true;
@@ -436,7 +445,8 @@ function handleScroll() {
     }
     if (window.scrollY <= 0) {
         nav.classList.remove("nav--scroll");
-        document.querySelector(".fa-magnifying-glass").classList += " magnifying-glass--dark";
+        document.querySelector(".fa-magnifying-glass").classList +=
+            " magnifying-glass--dark";
         document
             .querySelector(".nav__logo")
             .classList.remove("nav__logo--light");
@@ -468,13 +478,58 @@ function toggleNavSearch() {
 }
 
 /*
-setTimeout(() => {
-    const url = new URL(window.location.href);
 
-    // RETRIEVE PARAM FROM URL
-    const params = new URLSearchParams(url.search);
+ EMAIL CONTACT FORM
 
-    // EXTRACT VALUE FROM URL PARAM
-    const queryString = url.search.substring(1); // REMOVE LEADING '?'
-}); 
 */
+
+let isModalOpen = false;
+
+/* MAIL CONTACT FORM FUNCTIONALITY */
+function contact(e) {
+    try {
+        e.preventDefault();
+        const loading = document.querySelector(".modal__overlay--loading");
+        const success = document.querySelector(".modal__overlay--success");
+        loading.classList += " modal__overlay--visible";
+        emailjs
+            .sendForm(
+                "service_2zh7gkh",
+                "template_athyrzu",
+                e.target,
+                "M5JGTBwzcn6wIf6a7"
+            )
+            .then(() => {
+                loading.classList.remove("modal__overlay--visible");
+                success.classList += " modal__overlay--visible";
+            })
+            .catch(() => {
+                loading.classList.remove("modal__overlay--visible");
+                alert(
+                    "Error: The email service is temporarily unavailable. Please contact me directly on email.nytek@gmail.com."
+                );
+            });
+    } catch (error) {
+        console.error("Error in contact function:", error);
+    }
+}
+
+/* OPEN AND CLOSE THE MAIL CONTACT FORM */
+function toggleModal() {
+    if (isModalOpen) {
+        isModalOpen = false;
+        document.querySelector("nav").classList.remove("hide-element");
+        document
+            .querySelector(".view-all__header")
+            .classList.remove("hide-element");
+        document
+            .querySelector(".movies-container")
+            .classList.remove("hide-element");
+        return document.body.classList.remove("modal--open");
+    }
+    isModalOpen = true;
+    document.querySelector("nav").classList += " hide-element";
+    document.querySelector(".view-all__header").classList += " hide-element";
+    document.querySelector(".movies-container").classList += " hide-element";
+    document.body.classList += " modal--open";
+}

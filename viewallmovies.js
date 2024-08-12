@@ -440,6 +440,7 @@ function handleScroll() {
                 .classList.remove("magnifying-glass--dark");
             document.querySelector(".nav__logo").classList +=
                 " nav__logo--light";
+            document.querySelector(".bars--watch-all").classList += " lighten-nav-burger";
             hasScrolledDown = true;
         }
     }
@@ -447,6 +448,7 @@ function handleScroll() {
         nav.classList.remove("nav--scroll");
         document.querySelector(".fa-magnifying-glass").classList +=
             " magnifying-glass--dark";
+        document.querySelector(".bars--watch-all").classList.remove("lighten-nav-burger");
         document
             .querySelector(".nav__logo")
             .classList.remove("nav__logo--light");
@@ -475,6 +477,15 @@ function toggleNavSearch() {
             .querySelector(".xmark--close-nav-search")
             .classList.remove("nav__search--show-xmark");
     }
+}
+
+/* NAVBAR MENU OPEN/CLOSE */
+function openNavMenu () {
+    document.body.classList += " nav--menu-open";
+}
+
+function closeNavMenu () {
+    document.body.classList.remove("nav--menu-open");
 }
 
 /*

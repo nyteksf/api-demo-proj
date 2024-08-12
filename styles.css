@@ -409,6 +409,14 @@ nav {
     font-size: 26px;
 }
 
+.bars--watch-all {
+    color: #333344da;
+}
+
+.lighten-nav-burger {
+    color: lightgray;
+}
+
 /*
 
  LANDING PAGE
@@ -913,8 +921,7 @@ nav {
 
 .prev:active,
 .next:active {
-    color: #f06449;
-    border-color: #f0654993;
+    color: purple;
 }
 
 .pagination-menu__item.active-page {

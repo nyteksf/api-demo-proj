@@ -463,6 +463,7 @@ function toggleModal() {
   document.body.classList += " modal--open";
 }
 
+/* NAVBAR MENU OPEN/CLOSE */
 function openNavMenu () {
     document.body.classList += " nav--menu-open";
 }

@@ -1416,8 +1416,8 @@ footer {
 
 .show_trailer {
     visibility: visible !important;
-    display: block !important;
-    pointer-events: auto;
+    display: flex !important;
+    pointer-events: all;
 }
 
 .xmark--close-trailer--show {
@@ -1986,7 +1986,7 @@ textarea:focus {
 
     .youTubeVideo--wrapper {
         min-height: 60vh;
-        max-width: 80vw;
+        max-width: 70vw;
     }
 }
 

@@ -455,6 +455,7 @@ function toggleModal() {
     document.querySelector(".search").classList.remove("hide-element");
     return document.body.classList.remove("modal--open");
   }
+  window.scrollTo(0, 0);
   isModalOpen = true;
   document.querySelector("nav").classList += " hide-element";
   document.querySelector(".radio-panel--wrapper").classList += " hide-element";
@@ -464,7 +465,6 @@ function toggleModal() {
 
 function openNavMenu () {
     document.body.classList += " nav--menu-open";
-
 }
 
 function closeNavMenu () {

@@ -1412,6 +1412,7 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
     visibility: hidden;
+    display: none;
 }
 
 .show_trailer {

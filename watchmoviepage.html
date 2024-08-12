@@ -10,14 +10,28 @@
             defer
         ></script>
         <script src="./watchmovie.js" defer></script>
-        <link rel="icon" href="./assets/favicon1.png" type="image/x-icon">
+        <link rel="icon" href="./assets/favicon.png" type="image/x-icon" />
         <link rel="stylesheet" href="./styles.css" />
-        <script src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js" charset="utf-8" async></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/@webtor/embed-sdk-js/dist/index.min.js"
+            charset="utf-8"
+            async
+        ></script>
         <style>
-            body, html {
+            body,
+            html {
                 height: 100vh;
-                width:  100vw;
+                width: 100vw;
                 overflow: hidden;
+            }
+
+            @media (max-width: 653px) {
+                html,
+                body {
+                    overflow-y: scroll !important;
+                    height: 100% !important;
+                    width:  auto;
+                }
             }
         </style>
     </head>
@@ -35,11 +49,6 @@
                         </figure>
                     </div>
                     <div class="watch-movie__data">
-                        <i class="fa-solid fa-xmark xmark--watch-movie" onclick="goBack()"></i>
-                        <i
-                            class="fa-solid fa-xmark xmark--watch-movie xmark--close-trailer"
-                            onclick="hideTrailer();"
-                        ></i>
                         <div class="watch-movie__data--upper">
                             <div class="watch-movie__data-title">
                                 <h1><!-- MOVIE TITLE RENDERS HERE --></h1>
@@ -91,7 +100,10 @@
                                     Watch Trailer
                                 </button>
                             </a>
-                            <button class="btn__movie btn__play-movie" onclick="">
+                            <button
+                                class="btn__movie btn__play-movie"
+                                onclick=""
+                            >
                                 <i class="fa-solid fa-play"></i>
                             </button>
                         </div>
@@ -105,7 +117,12 @@
                 <i class="fa-solid fa-play"></i>
             </div>
         </div>
-        <div class="youTubeVideo--wrapper"></div>
+        <div class="youTubeVideo--wrapper">
+            <i
+                class="fa-solid fa-xmark xmark--close-trailer"
+                onclick="hideTrailer();"
+            ></i>
+        </div>
         <video class="streamingVideoPlayer"></video>
         <div class="video-underlay"></div>
         <iframe
@@ -116,13 +133,7 @@
             allow="autoplay; encrypted-media"
             allowfullscreen
         >
-            <div
-                style="
-                    width: 100%;
-                    height: 100%;
-                "
-            >
-            </div>
+            <div style="width: 100%; height: 100%"></div>
             <video id="trailerVideo" controls>
                 <source src="#" type="video/mp4" class="trailerVideoLink" />
                 Your browser does not support the video tag.

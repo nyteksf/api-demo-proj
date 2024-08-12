@@ -533,3 +533,19 @@ function toggleModal() {
     document.querySelector(".movies-container").classList += " hide-element";
     document.body.classList += " modal--open";
 }
+
+function renderDate() {
+    const footerSmallText = document.querySelectorAll(".footer__small-text");
+    footerSmallText.forEach((dateSlot, index) => {
+        let currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() - index);
+        const formattedDate = currentDate.toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+        });
+        dateSlot.innerHTML = formattedDate;
+    });
+}
+
+renderDate();

@@ -2022,6 +2022,10 @@ textarea:focus {
     .youTubeVideo--wrapper {
         min-height: 60vh;
     }
+
+    .body-scroll {
+        overflow-y: scroll !important;
+    }
 }
 
 @media (max-width: 768px) {

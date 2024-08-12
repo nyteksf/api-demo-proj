@@ -380,7 +380,7 @@ function showMovie(e) {
     if (e) {
         e.preventDefault();
     }
-
+    document.querySelector('.webtor').style.pointerEvents = 'all';
     videoUnderlay.classList += " show_trailer";
     watchMovie.classList += " xmark-make-seen";
     youtubeVidWrapper.classList += " show_trailer";
@@ -406,6 +406,7 @@ function showTrailer() {
 }
 
 function hideTrailer() {
+    document.querySelector('.webtor').style.pointerEvents = 'none';
     youtubeVideoLink.classList.remove("show_trailer");
     videoUnderlay.classList.remove("show_trailer");
     xmarkCloseTrailer.classList.remove("xmark--close-trailer--show");

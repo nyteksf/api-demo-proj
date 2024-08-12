@@ -2017,6 +2017,7 @@ textarea:focus {
 
     .youtubeVideoLink {
         min-height: 40vh;
+        visibility: hidden;
     }
 
     .youTubeVideo--wrapper {
@@ -2156,6 +2157,7 @@ textarea:focus {
         width: 100%;
         max-width: 60vw;
         min-height: 50vh;
+        visibility: hidden;
     }
 
     .youTubeVideo--wrapper {
@@ -2367,6 +2369,7 @@ textarea:focus {
         width: auto;
         max-width: 90vw;
         min-height: 25vh;
+        visibility: hidden;
     }
 
     .youTubeVideo--wrapper {

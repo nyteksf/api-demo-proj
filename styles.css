@@ -1355,7 +1355,7 @@ footer {
     justify-content: space-between;
     width: 100%;
     max-width: 300px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     position: relative;
 }
 
@@ -1399,7 +1399,7 @@ footer {
 
 .slider-label {
     display: inline-block;
-    width: 20px; 
+    width: 20px;
     height: 20px;
     text-align: center;
     line-height: 20px;
@@ -2086,6 +2086,26 @@ textarea:focus {
         min-height: 60vh;
         max-width: 70vw;
     }
+
+    .watch-movie__data--btns {
+        text-align: center;
+        flex-direction: column-reverse;
+        display: flex;
+    }
+
+    .slider-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: absolute;
+        bottom: 64px;
+        right: 50%;
+        width: 100%;
+        max-width: 260px;
+        bottom: 134px;
+        transform: translateX(50%);
+    }
 }
 
 @media (max-width: 940px) {
@@ -2555,6 +2575,20 @@ textarea:focus {
 
     .movie-info__list-item:nth-of-type(1) {
         list-style-type: none;
+    }
+
+    /*
+    
+     WATCH MOVIE PAGE
+    
+    */
+
+    .slider-container {
+        bottom: 191px;
+    }
+
+    .watch-movie__data--btns {
+        margin-top: 80px;
     }
 }
 

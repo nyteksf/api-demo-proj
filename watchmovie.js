@@ -47,9 +47,22 @@ function searchYts(imdbId) {
     fetch(`https://yts.mx/api/v2/list_movies.json?query_term=${imdbId}`)
         .then((response) => response.json())
         .then((results) => {
+            const movieCount = results.data.movie_count;
             results = results.data;
+            let movieArr = [];
+            console.log(`Found ${movieCount} movies.`);
+            if (movieCount > 0) {
+                // FORM ARRAY OF TORRENT QUALITY OPTIONS
+                for (let i = 0; i < results.movies[0].torrents.length; i++) {
+                    const movieObj = results.movies[0].torrents[i];
 
-            console.log(results);
+                    addObjectToArray(movieArr, movieObj);
+                }
+            }
+            renderMovieQualityOptions(movieArr);
+
+            // SET LOWEST QUALITY TORRENT AS DEFAULT
+            // (AND SET MAGNET LINK)
             if (results.movie_count >= 1) {
                 console.log("MOVIE FOUND");
                 // SEARCH FOR TORRENT DATA
@@ -79,6 +92,93 @@ function searchYts(imdbId) {
         .catch((err) => console.error(err));
 }
 
+let buttons;
+const indicator = document.querySelector(".slider-indicator");
+
+// MOVE INDICATOR TO SELECTED RADIO BTN POSITION
+// GRAB HASH ID TO FORM NEW MAGNET LINK & ADD TO MOVIE PLAY BTN
+function moveToSelectedButton(button) {
+    let torrentHash = button.getAttribute("hash");
+
+    adjustMovieQuality(torrentHash);
+
+    const label = document.querySelector(`label[for=${button.id}]`);
+    const offsetLeft =
+        label.offsetLeft + label.offsetWidth / 2 - indicator.offsetWidth / 2;
+    indicator.style.transform = `translateX(${offsetLeft}px)`;
+}
+
+function adjustMovieQuality(hash) {
+    const playBtn = document.querySelector(".btn__play-movie");
+    console.log(hash);
+    playBtn.setAttribute(
+        "onclick",
+        `showMovie(event); 
+        window.webtor = window.webtor || []; 
+        window.webtor.push({ 
+            id: 'streaming-player', 
+            magnet: '${formMagnetLink(hash)}', 
+            height: '100%', 
+            width: '100%', 
+            lang: 'en' 
+        });`
+    );
+}
+
+// Function to render movie quality options and set up event listeners
+function renderMovieQualityOptions(movieArr) {
+    const sliderContainer = document.querySelector(".slider-container");
+    const sliderLabelDiv = document.querySelector(".slider-labels");
+    const sliderTrackDiv = document.querySelector(".slider-buttons");
+    console.log("FUCKKK");
+    let sliderLabelsStr = "";
+    let sliderButtonsStr = "";
+
+    if (movieArr.length > 1) {
+        sliderContainer.style.display = "block";
+
+        movieArr.forEach((movie, index) => {
+            sliderLabelsStr += `<label class="slider-label" for="quality-${movie.quality}">${movie.quality}</label>`;
+
+            sliderButtonsStr += `<input type="radio" id="quality-${
+                movie.quality
+            }" hash="${movie.hash}" name="quality" class="slider-btn" ${
+                index === 0 ? "checked" : ""
+            }>`;
+        });
+
+        sliderLabelDiv.innerHTML = sliderLabelsStr;
+        sliderTrackDiv.innerHTML = sliderButtonsStr;
+
+        // FIND BTNS AFTER BEING ADDED TO DOM
+        buttons = document.querySelectorAll(".slider-btn");
+
+        // ADD EVENT LISTENERS THEREUNTO
+        buttons.forEach((button) => {
+            button.addEventListener("click", () =>
+                moveToSelectedButton(button)
+            );
+        });
+
+        // MOVE TO FIRST SELCTED QUALITY BY DEFAULT ON LOAD
+        moveToSelectedButton(document.querySelector(".slider-btn:checked"));
+    } else {
+        console.log("Only one torrent quality available.");
+        // HIDE QUALITY SLIDER IF ONLY ONE TORRENT OPTION
+        sliderContainer.style.display = "none";
+    }
+}
+
+function addObjectToArray(arr, movieObj) {
+    // Check IF QUALITY ALREADY EXISTS IN ARRAY
+    const itemExists = arr.some((obj) => obj.quality === movieObj.quality);
+
+    if (!itemExists) {
+        arr.push({ quality: movieObj.quality, hash: movieObj.hash });
+        // console.log(`Added: ${JSON.stringify({ quality: movieObj.quality, hash: movieObj.hash })}`);
+    }
+}
+
 async function searchPirateBay(imdbQuery) {
     console.log("imdbQuery ", imdbQuery);
 
@@ -95,7 +195,7 @@ async function searchPirateBay(imdbQuery) {
 
         if (filteredMovieList.length > 0) {
             // SPAWN NEW PLAYER/DESTROY OLD
-            console.log(filteredMovieList[0].info_hash);
+            console.log(filteredMovieList);
             let nextMagnetLink = filteredMovieList[0].info_hash;
 
             console.log(formMagnetLink(nextMagnetLink));
@@ -132,7 +232,8 @@ function containsTitle(str, title) {
     const words = filteredTitle.split(" ").filter((word) => word.length > 0);
     const pattern = new RegExp(
         words.map((word) => `(?=.*\\b${word}\\b)`).join(""),
-        "i");
+        "i"
+    );
 
     // Function to normalize the input string
     function normalizeString(str) {
@@ -380,7 +481,7 @@ function showMovie(e) {
     if (e) {
         e.preventDefault();
     }
-    document.querySelector('.webtor').style.pointerEvents = 'all';
+    document.querySelector(".webtor").style.pointerEvents = "all";
     videoUnderlay.classList += " show_trailer";
     watchMovie.classList += " xmark-make-seen";
     youtubeVidWrapper.classList += " show_trailer";
@@ -406,7 +507,7 @@ function showTrailer() {
 }
 
 function hideTrailer() {
-    document.querySelector('.webtor').style.pointerEvents = 'none';
+    document.querySelector(".webtor").style.pointerEvents = "none";
     youtubeVideoLink.classList.remove("show_trailer");
     videoUnderlay.classList.remove("show_trailer");
     xmarkCloseTrailer.classList.remove("xmark--close-trailer--show");

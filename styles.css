@@ -314,10 +314,10 @@ nav {
 .menu__backdrop {
     position: absolute;
     background: #242424;
-    top:  0;
+    top: 0;
     left: 0;
     height: 100vh;
-    width:  100vw;
+    width: 100vw;
     z-index: 9000;
     justify-content: center;
     align-items: center;
@@ -328,7 +328,7 @@ nav {
     display: flex;
 }
 
-.menu__links { 
+.menu__links {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -380,7 +380,7 @@ nav {
 .btn__menu {
     position: absolute;
     background-color: transparent;
-    top:   10px;
+    top: 10px;
     right: 20px;
     border: none;
     color: #f5f5f5;
@@ -392,7 +392,7 @@ nav {
 }
 
 .btn__menu:hover {
-    color: #F5F5F5;
+    color: #f5f5f5;
 }
 
 .btn__contact:active {
@@ -914,8 +914,9 @@ nav {
     border-radius: 4px;
     margin: 0 1px;
     border: 1px solid #333;
-    height: 34px;
-    width: 34px;
+    height: 48px;
+    width: 48px;
+    font-size: 28px;
     text-decoration: none;
 }
 
@@ -940,7 +941,9 @@ nav {
 
 .prev,
 .next {
-    font-size: 20px;
+    font-size: 32px;
+    margin-top: 32px;
+    margin-bottom: 32px;
 }
 
 .prev:hover,
@@ -1099,9 +1102,9 @@ footer {
 
  */
 
- .make-scroll {
+.make-scroll {
     overflow-y: scroll;
- }
+}
 
 .watch-movie-page--bg {
     position: absolute;
@@ -1331,6 +1334,94 @@ footer {
 .imdb_icon {
     position: relative;
     width: 24px;
+}
+
+/* MOVIE QUALITY SLIDER */
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 64px;
+    right: 40px;
+    width: 100%;
+    max-width: 260px;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 5px; 
+    position: relative;
+}
+
+.slider-label {
+    color: #f5f5f5;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.slider-track {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    background-color: #333;
+    height: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px;
+    left: 4px;
+}
+
+.slider-btn {
+    position: absolute;
+    opacity: 0;
+}
+
+.slider-indicator {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #7342d6;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    z-index: 8;
+    left: 1px;
+    border: 2px solid #f5f5f5;
+}
+
+.slider-label {
+    display: inline-block;
+    width: 20px; 
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    position: relative;
+}
+
+.slider-label::before {
+    content: "";
+    position: absolute;
+    top: 145%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f5f5f5;
+    border-radius: 50%;
+    z-index: 6;
+    background-color: #333;
+}
+
+.slider-label::before:hover {
+    background-color: purple;
 }
 
 /*
@@ -1939,7 +2030,7 @@ textarea:focus {
     */
     .video__loading-state {
         min-height: 40vh;
-        max-width:  50vw;
+        max-width: 50vw;
     }
 
     #streaming-player {
@@ -2007,7 +2098,7 @@ textarea:focus {
     .nav__list--container {
         display: none;
     }
-    
+
     .nav__right {
         display: none;
     }
@@ -2248,7 +2339,7 @@ textarea:focus {
     body {
         overflow-y: scroll !important;
     }
-    
+
     /*
     
      NAV
@@ -2270,7 +2361,7 @@ textarea:focus {
     .modal__languages {
         display: none;
     }
-   
+
     .modal__title--contact {
         margin-top: 48px;
     }
@@ -2467,7 +2558,7 @@ textarea:focus {
     }
 }
 
-@media (max-width: 480px) {    
+@media (max-width: 480px) {
     .responsive-row-sm-2 {
         padding-top: 48px;
         padding-bottom: 48px;

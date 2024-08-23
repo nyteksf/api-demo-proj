@@ -2583,10 +2583,6 @@ textarea:focus {
     
     */
 
-    .ascii-art {
-        font-size: 8px;
-    }
-
     .slider-container {
         bottom: 191px;
     }
@@ -2598,7 +2594,7 @@ textarea:focus {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { 
     .responsive-row-sm-2 {
         padding-top: 48px;
         padding-bottom: 48px;

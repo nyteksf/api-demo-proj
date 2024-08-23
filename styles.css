@@ -2589,6 +2589,8 @@ textarea:focus {
 
     .watch-movie__data--btns {
         margin-top: 80px;
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 

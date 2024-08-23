@@ -2583,6 +2583,10 @@ textarea:focus {
     
     */
 
+    .ascii-art {
+        font-size: 8px;
+    }
+
     .slider-container {
         bottom: 191px;
     }
